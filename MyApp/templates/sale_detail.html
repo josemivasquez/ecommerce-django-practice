@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block content %}
+
+
+<h5> Codigo de Compra: {{sale.id}} </h5>
+<h5> Fecha de Compra: {{sale.date}} </h5>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col"> Nombre </th>
+            <th scope="col"> Cantidad </th>
+            <th scope="col"> Precio </th>
+            <th scope="col"> Subtotal </th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for detail in details %}
+        <tr>
+            <td> {{ detail.product.name }} </td>
+            <td> {{ detail.varProduct }} {{ detail.product.unit }} </td>
+            <td> {{ detail.product.price }} PEN</td>
+            <td> {{ detail.money }} </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<h5> Total: {{ sale.amount }} PEN </h5>
+<a href="/main/sales_view" class = "btn btn-primary">Back</a>
+
+
+{% endblock %}

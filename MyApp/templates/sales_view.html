@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block content %}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col"> Codigo de Compra </th>
+            <th scope="col"> Total </th>
+            <th scope="col"> Fecha </th>
+            <th scope="col"> </th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for sale in sales %}
+        <tr>
+            <td> {{sale.id}} </td>
+            <td> {{sale.amount}} </td>
+            <td> {{sale.date}} </td>
+            <td>
+                <a href="sales_view/{{sale.id}}"> Detalles </a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<a href="/main" class = "btn btn-primary">Back</a>
+
+
+{% endblock %}

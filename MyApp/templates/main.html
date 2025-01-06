@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2> Product Catalog </h2>
+<a href="sales_view">
+    <button type="button" class="btn btn-primary">Ver mis compras</button>
+</a>
+
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#carritoModal">
+    Mostrar Carrito
+</button>
+
+<!-- Carrito Modal -->
+<div class="modal fade" id="carritoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"> Carrito de Compras </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col"> Nombre </th>
+                    <th scope="col"> Descripcion </th>
+                    <th scope="col"> Cantidad </th>
+                    <th scope="col"> Subtotal </th>
+                    <th scope="col"> </th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for key, product in cart.products.items %}
+                <tr>
+                    <td> {{product.name}} </td>
+                    <td> {{product.description}} </td>
+                    <td> {{product.cantidad}} {{product.unidad}} </td>
+                    <td> {{product.subtotal}} PEN</td>
+                    <td>
+                        <a href="remove_cart/{{product.id}}">Quitar</a></h3>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <h5> Total: {{ cart.total }} PEN </h5>
+      </div>
+      <div class="modal-footer">
+        <a href="sale">
+            <button type="button" class="btn btn-primary"> Comprar </button>
+        </a>
+        <a href="clean_cart">
+            <button type="button" class="btn btn-secondary"> Limpiar Carrito </button>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container-elements">
+    {% for product in catalog  %}
+    <div class= "card-extra">
+        <img class="card-img-top img-product" src="{{product.image}}"> </img>
+        <div class="card-body">
+            <h5 class="card-title"> {{ product.name }} </h5>
+            <p class="card-text">
+            {{ product.description }}
+            </p>
+        </div>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item"> Fabricado por: {{ product.maker.name }}</li>
+            <li class="list-group-item"> Precio: {{ product.price }} / {{ product.unit }} </li>
+        </ul>
+        <div class="card-body">
+            <a href="add_cart/{{product.id}}" class="btn-btn-primary"> Agregar al carrito </a>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+
+{% endblock %}
